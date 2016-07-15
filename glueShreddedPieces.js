@@ -50,7 +50,38 @@ The number of test cases is 20.
 
 */
 
+function copyArray(a){
+  var newArray = [];
+  for (var i = 0; i < a.length; i++){
+    newArray[i] = a[i];
+  }
+  return newArray;
+}
+
 function reassemble(pieces){
+  var piecesCopy = copyArray(pieces);
+  var i = 0, result = assemble(piecesCopy);
+  //Putting in i to make sure this doesn't create an infinite loop.
+  while (typeof result !== "string" && i < 5){
+    //Find one of the unused pieces returned by assemble and move it to the start of the array.
+    //This creates a new starting seed, and by extension a new string.
+    for (var j = 0; j < result.length - 1; j++){
+      var position = pieces.indexOf(result[j]);
+      var piece = pieces.splice(position, 1)
+      pieces.unshift(piece[0]);
+    }
+    piecesCopy = copyArray(pieces);
+    result = assemble(piecesCopy);
+    i++;
+  }
+  if (typeof result === "string"){
+    return result;
+  } else {
+    return result[result.length - 1] + "  FAILED";
+  }
+}
+
+function assemble(pieces){
   var fits, confirm, i, j, k, l, text = pieces.shift();
   //Add fragments to the end of the text.
   for (i = 0; i < pieces.length; i++ ){
@@ -157,7 +188,13 @@ function reassemble(pieces){
       }
     }
   }
-  return text;
+  //If the entire text has been assembled, return it, otherwise return the pieces that could not be assembled.
+  if (pieces.length === 0){
+    return text;
+  } else {
+    pieces.push(text);
+    return pieces;
+  }
 }
 
 //Code for CodeEval submission:
