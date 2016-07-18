@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var challenge = require('../hardChallenges/asciiDecryption.js');
+var challenge = require('../hardChallenges_JS/asciiDecryption.js');
 
 describe('ASCII Decryption Challenge', function(){
 

@@ -50,6 +50,18 @@ The number of test cases is 20.
 
 */
 
+function testReassemble(line){
+  var values = line.split("|");
+  if (values[0] === ""){
+    values.shift();
+  }
+  if (values[values.length - 1] === ""){
+    values.pop();
+  }
+  var answer_line = reassemble(values);
+  console.log(answer_line);
+}
+
 function copyArray(a){
   var newArray = [];
   for (var i = 0; i < a.length; i++){
