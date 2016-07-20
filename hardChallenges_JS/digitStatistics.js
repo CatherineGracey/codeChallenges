@@ -25,20 +25,13 @@ Constraints:
 
 */
 
-function buildSequence(num1, num2){
-  var sequence = [num1];
-  for (var i = 1; i < num2; i++ ){
-    sequence.push(num1 * sequence[sequence.length - 1]);
-  }
-  return sequence;
-}
-
-function countDigits(sequence){
+function countDigits(num1, num2){
   var digit, digits = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-  for (var i = 0; i < sequence.length; i++){
-    digit = sequence[i].toString();
-    digit = digit.substr(-1);
-    digit = parseInt(digit);
+  var prev = 1, current;
+  for (var i = 1; i <= num2; i++ ){
+    prev = prev * num1;
+    current = prev.toString();
+    digit = parseInt(current[current.length - 1]);
     digits[digit]++;
   }
   return digits;
@@ -58,8 +51,7 @@ function formatDigits(digits){
 function getStatistics(line){
   var nums = line.split(" ");
   var num1 = parseInt(nums[0]), num2 = parseInt(nums[1]);
-  var sequence = buildSequence(num1, num2);
-  var digits = countDigits(sequence);
+  var digits = countDigits(num1, num2);
   var statistics = formatDigits(digits);
   return statistics;
 }
@@ -73,7 +65,6 @@ var fs  = require("fs");
     }
 });*/
 
-module.exports.buildSequence = buildSequence;
 module.exports.countDigits = countDigits;
 module.exports.formatDigits = formatDigits;
 module.exports.getStatistics = getStatistics;

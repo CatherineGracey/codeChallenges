@@ -3,33 +3,10 @@ var challenge = require('../hardChallenges_JS/digitStatistics.js');
 
 describe('Digit Statistics Challenge', function(){
 
-  describe('buildSequence', function(){
-    var buildSequence = challenge.buildSequence;
-    var num1 = 2, num2 = 5;
-    var test = buildSequence(num1, num2);//[2, 4, 8, 16, 32]
-
-    it('Should return an array.', function(){
-      expect(test).to.be.a("array");
-    });
-
-    it('Should return the correct length', function(){
-      expect(test.length).to.equal(num2);
-    });
-
-    it('The array should be populated with numbers.', function (){
-      expect(test[0]).to.be.a('number');
-      expect(test[3]).to.be.a('number');
-    });
-
-    it('The array should be populated with the correct numbers', function(){
-      expect(test).to.deep.equal([2, 4, 8, 16, 32]);
-    });
-  });
-
   describe('countDigits', function(){
     var countDigits = challenge.countDigits;
-    var sequence = [2, 4, 8, 16, 32];
-    var test = countDigits(sequence);
+    var num1 = 2, num2 = 5;
+    var test = countDigits(num1, num2);//[2, 4, 8, 16, 32]
 
     it('Should return an array.', function(){
       expect(test).to.be.a("array");
