@@ -26,13 +26,34 @@ Constraints:
 */
 
 function countDigits(num1, num2){
-  var digit, digits = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-  var prev = 1, current;
-  for (var i = 1; i <= num2; i++ ){
-    prev = prev * num1;
-    current = prev.toString();
-    digit = parseInt(current[current.length - 1]);
-    digits[digit]++;
+  function loopNumbers(){
+    for (var i = 1; i <= stop; i++ ){
+      prev = prev * num1;
+      current = prev.toString();
+      prev = parseInt(current[current.length - 1]);
+      digits[prev]++;
+    }
+  }
+  var digits = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  var stop, prev = 1, current;
+  if (num2 > 100){
+    stop = 100;
+    //Build the base pattern.
+    loopNumbers();
+    //Set the final part of the counter.
+    stop = num2 % 100;
+    //Extend the pattern
+    current = Math.floor(num2 / 100);
+    for (var i = 0; i < 10; i++){
+      digits[i] = digits[i] * current;
+    }
+    //Finish counting
+    loopNumbers();
+  } else {
+    stop = num2;
+    num2 = 0;
+    //Build the base pattern.
+    loopNumbers();
   }
   return digits;
 }
@@ -66,5 +87,6 @@ var fs  = require("fs");
 });*/
 
 module.exports.countDigits = countDigits;
+module.exports.countDigitsOld = countDigitsOld;
 module.exports.formatDigits = formatDigits;
 module.exports.getStatistics = getStatistics;
